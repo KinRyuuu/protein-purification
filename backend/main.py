@@ -3,9 +3,10 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from .api import sessions, mixtures, separation, fractions, electrophoresis, files
-from .dependencies import get_session_store, get_settings, get_data_dir
+from .dependencies import get_session_store, get_settings, get_data_dir, _WEB_PROJECT_ROOT
 
 
 @asynccontextmanager
@@ -45,3 +46,10 @@ app.include_router(files.router)
 async def health_check() -> dict:
     """Health check endpoint."""
     return {"status": "ok"}
+
+
+# Serve the built frontend as static files. This is only active when
+# frontend/dist exists (i.e. after `npm run build`), so dev mode is unaffected.
+_frontend_dist = _WEB_PROJECT_ROOT / "frontend" / "dist"
+if _frontend_dist.is_dir():
+    app.mount("/", StaticFiles(directory=str(_frontend_dist), html=True), name="static")

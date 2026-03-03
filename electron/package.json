@@ -1,0 +1,38 @@
+{
+  "name": "protein-purification",
+  "version": "0.1.0",
+  "description": "Educational protein purification simulation",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^34.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.proteinpurification.app",
+    "productName": "Protein Purification",
+    "directories": {
+      "output": "../release"
+    },
+    "extraResources": [
+      {
+        "from": "../dist/protein-purification-server",
+        "to": "backend",
+        "filter": ["**/*"]
+      }
+    ],
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "Education"
+    },
+    "mac": {
+      "target": ["dmg"]
+    },
+    "win": {
+      "target": ["nsis"]
+    }
+  }
+}

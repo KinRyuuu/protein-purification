@@ -1,6 +1,7 @@
 """FastAPI dependency injection helpers."""
 from __future__ import annotations
 
+import sys
 from functools import lru_cache
 from pathlib import Path
 
@@ -12,8 +13,11 @@ from .session_store import SessionStore
 
 _store: SessionStore | None = None
 
-# Project root: protein_purification_web/
-_WEB_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+# Project root: protein_purification_web/ (or sys._MEIPASS when frozen by PyInstaller)
+if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+    _WEB_PROJECT_ROOT = Path(sys._MEIPASS)
+else:
+    _WEB_PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
 @lru_cache
