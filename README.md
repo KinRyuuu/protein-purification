@@ -1,6 +1,6 @@
 # Protein Purification Web
 
-A modern web-based educational simulation of protein separation techniques, originally created by Prof. Andrew Booth in 1983. This webapp replaces the legacy Windows (C++), macOS (Obj-C), and iOS (Obj-C) versions with a single cross-platform solution.
+A modern web-based educational simulation of protein separation techniques, [originally created by Prof. Andrew Booth in 1983](https://github.com/agbooth/protein_purification). This webapp replaces the legacy Windows (C++), macOS (Obj-C), and iOS (Obj-C) versions with a single cross-platform solution.
 
 ## Tech Stack
 
