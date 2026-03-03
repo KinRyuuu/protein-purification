@@ -4,6 +4,8 @@
 #
 # Output: dist/protein-purification-server/  (one directory, used by Electron)
 
+from PyInstaller.utils.hooks import collect_submodules
+
 a = Analysis(
     ["server.py"],
     pathex=["."],
@@ -14,6 +16,9 @@ a = Analysis(
         ("frontend/dist", "frontend/dist"),
     ],
     hiddenimports=[
+        # backend package is imported via string in uvicorn.run("backend.main:app")
+        # so PyInstaller can't detect it statically — collect all submodules explicitly
+        *collect_submodules("backend"),
         # uvicorn dynamically imports these via importlib
         "uvicorn.logging",
         "uvicorn.loops",

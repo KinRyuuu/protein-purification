@@ -72,6 +72,7 @@ export interface SessionState {
   gelData?: (GelBand | GelSpot)[] | null;
   hicPrecipitation?: number;
   failureMessage?: string;
+  successMessage?: string;
 }
 
 const STATE_CHANGE_EVENT = "pp-state-change";

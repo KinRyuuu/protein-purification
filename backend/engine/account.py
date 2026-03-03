@@ -88,3 +88,10 @@ class Account:
         if self.records and self.records[-1].cost_per_unit > MAX_COST_PER_UNIT:
             return "Cost is too high!"
         return None
+
+    def check_success(self) -> bool:
+        """Return True if purification is complete (≥10-fold enrichment, ≥5% yield)."""
+        if len(self.records) < 2:
+            return False
+        latest = self.records[-1]
+        return latest.enrichment >= 10.0 and latest.enzyme_yield >= 5.0

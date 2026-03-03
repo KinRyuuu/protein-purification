@@ -3,10 +3,23 @@
 const { app, BrowserWindow, dialog } = require("electron");
 const { spawn } = require("child_process");
 const http = require("http");
+const net = require("net");
 const path = require("path");
 
-const PORT = 8000;
+let port = null;
 let backendProcess = null;
+
+// Find a free TCP port in the ephemeral range (49152–65535).
+function getFreePort() {
+  return new Promise((resolve, reject) => {
+    const srv = net.createServer();
+    srv.listen(0, "127.0.0.1", () => {
+      const { port: p } = srv.address();
+      srv.close((err) => (err ? reject(err) : resolve(p)));
+    });
+    srv.on("error", reject);
+  });
+}
 
 // ---------------------------------------------------------------------------
 // Locate the bundled PyInstaller binary
@@ -39,7 +52,7 @@ function getBackendExecutable() {
 
 function startBackend() {
   const exe = getBackendExecutable();
-  backendProcess = spawn(exe, [], {
+  backendProcess = spawn(exe, ["--port", String(port)], {
     stdio: ["ignore", "pipe", "pipe"],
   });
 
@@ -66,7 +79,7 @@ function waitForBackend(maxAttempts = 40, intervalMs = 500) {
 
     function check() {
       const req = http.get(
-        `http://127.0.0.1:${PORT}/api/health`,
+        `http://127.0.0.1:${port}/api/health`,
         (res) => {
           res.resume(); // discard body
           if (res.statusCode === 200) {
@@ -110,7 +123,7 @@ function createWindow() {
     },
   });
 
-  win.loadURL(`http://127.0.0.1:${PORT}`);
+  win.loadURL(`http://127.0.0.1:${port}`);
 }
 
 // ---------------------------------------------------------------------------
@@ -118,6 +131,7 @@ function createWindow() {
 // ---------------------------------------------------------------------------
 
 app.whenReady().then(async () => {
+  port = await getFreePort();
   startBackend();
 
   try {

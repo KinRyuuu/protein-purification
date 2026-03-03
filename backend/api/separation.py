@@ -81,6 +81,8 @@ async def run_separation(
         failure = session.account.check_failure(session.proteins, session.enzyme_index)
         if failure:
             session.phase = session.phase.FINISHED
+        elif session.account.check_success():
+            session.phase = session.phase.FINISHED
         return session.to_state_dict()
 
     if request.type == SeparationType.GEL_FILTRATION:
@@ -161,6 +163,8 @@ async def as_choice(
 
     failure = session.account.check_failure(session.proteins, session.enzyme_index)
     if failure:
+        session.phase = session.phase.FINISHED
+    elif session.account.check_success():
         session.phase = session.phase.FINISHED
 
     return session.to_state_dict()

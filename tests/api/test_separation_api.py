@@ -101,3 +101,55 @@ async def test_abandon_step(client: AsyncClient, running_session: str):
     data = resp.json()
     assert data["pooled"] is True
     assert data["has_fractions"] is False
+
+
+# ---------------------------------------------------------------------------
+# FINISHED state banner key tests
+# ---------------------------------------------------------------------------
+
+async def test_api_response_has_failure_message(client: AsyncClient, running_session: str):
+    """API response includes failure_message (snake_case) when enzyme is lost."""
+    from backend.dependencies import get_session_store
+
+    sid = running_session
+    # Drain the enzyme directly on the server-side session object
+    store = get_session_store()
+    session = store.get(sid)
+    session.proteins[session.enzyme_index].amount = 0.0
+    session.proteins[session.enzyme_index].activity = 0
+
+    # Heat treatment will call check_failure → detect lost enzyme → FINISHED
+    resp = await client.post(
+        f"/api/sessions/{sid}/separate",
+        json={"type": "heat_treatment", "temperature": 50.0, "duration": 10.0},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["phase"] == "finished", f"Expected finished, got {data['phase']}"
+    assert "failure_message" in data, "failure_message missing from API response"
+    assert "success_message" not in data
+
+
+async def test_api_response_has_success_message(client: AsyncClient, running_session: str):
+    """GET /state returns success_message (snake_case) when FINISHED with success records."""
+    from backend.dependencies import get_session_store
+    from backend.engine.enums import SessionPhase
+    from backend.engine.step_record import StepRecord
+
+    sid = running_session
+    store = get_session_store()
+    session = store.get(sid)
+
+    # Inject records that meet success thresholds (enrichment>=10, yield>=5)
+    session.account.records = [
+        StepRecord("Initial", 100.0, 2000.0, 100.0, 1.0, 0.0),
+        StepRecord("Affinity", 5.0, 2000.0, 80.0, 15.0, 0.5),
+    ]
+    session.phase = SessionPhase.FINISHED
+
+    resp = await client.get(f"/api/sessions/{sid}/state")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["phase"] == "finished"
+    assert "success_message" in data, "success_message missing from API response"
+    assert "failure_message" not in data

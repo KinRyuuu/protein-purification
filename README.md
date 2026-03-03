@@ -89,6 +89,67 @@ The codebase follows a clean separation of concerns:
 
 The server is authoritative---all simulation runs server-side. The frontend mirrors state returned from each API response.
 
+## Electron Desktop App
+
+The app can be packaged as a standalone desktop executable. The build has three
+steps: compile the frontend, bundle the Python backend with PyInstaller, then
+wrap everything with electron-builder.
+
+**Each platform must be built on that platform** — PyInstaller cannot
+cross-compile.
+
+### Linux
+
+Prerequisites:
+
+- Python 3.11+ with a `.venv` set up (`pip install -e ".[dev]"`)
+- PyInstaller (`pip install pyinstaller`)
+- Node.js / npm
+
+```bash
+cd protein_purification_web
+./scripts/build-electron.sh
+```
+
+Output: `release/Protein Purification-0.1.0.AppImage` and `.deb`.
+
+To skip a slow step during iteration:
+
+```bash
+./scripts/build-electron.sh --skip-frontend      # frontend already built
+./scripts/build-electron.sh --skip-pyinstaller   # Python bundle already built
+```
+
+### Windows
+
+Prerequisites:
+
+- Python 3.11+ with a `.venv` set up (`pip install -e ".[dev]"`)
+- PyInstaller (`.venv\Scripts\pip install pyinstaller`)
+- Node.js / npm
+
+```powershell
+cd protein_purification_web
+.\scripts\build-electron.ps1
+```
+
+Output: `release\Protein Purification Setup 0.1.0.exe` (NSIS installer).
+
+```powershell
+.\scripts\build-electron.ps1 -SkipFrontend      # frontend already built
+.\scripts\build-electron.ps1 -SkipPyinstaller   # Python bundle already built
+```
+
+### How it works
+
+1. **Frontend** (`npm run build`) — Vite compiles TypeScript to `frontend/dist/`.
+2. **PyInstaller** (`server.spec`) — bundles the FastAPI backend, `data/`, and
+   `frontend/dist/` into a single native binary (`dist/protein-purification-server/`).
+   FastAPI serves both the API (`/api/*`) and the frontend static files (`/`).
+3. **electron-builder** — wraps the Electron shell and the PyInstaller binary
+   into a platform-native package. At runtime, Electron picks a free port,
+   spawns the binary on that port, and opens it in a BrowserWindow.
+
 ## See Also
 
 - [FEATURES.md](FEATURES.md) --- Detailed feature design and implementation milestones

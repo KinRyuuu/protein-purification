@@ -84,3 +84,60 @@ def test_failure_cost_too_high():
     acc.add_step("expensive", proteins, enzyme_index=1, cost=500.0)
     result = acc.check_failure(proteins, enzyme_index=1)
     assert result == "Cost is too high!"
+
+
+# ---------------------------------------------------------------------------
+# check_success tests
+# ---------------------------------------------------------------------------
+
+def _make_record(enrichment: float, enzyme_yield: float):
+    from backend.engine.step_record import StepRecord
+    return StepRecord(
+        step_type="test",
+        protein_amount=10.0,
+        enzyme_units=100.0,
+        enzyme_yield=enzyme_yield,
+        enrichment=enrichment,
+        cost_per_unit=0.0,
+    )
+
+
+def test_check_success_meets_thresholds():
+    """Success requires enrichment >= 10 AND yield >= 5."""
+    acc = Account()
+    acc.records = [_make_record(1.0, 100.0), _make_record(10.0, 5.0)]
+    assert acc.check_success() is True
+
+
+def test_check_success_exceeds_thresholds():
+    """Values well above thresholds also return True."""
+    acc = Account()
+    acc.records = [_make_record(1.0, 100.0), _make_record(50.0, 80.0)]
+    assert acc.check_success() is True
+
+
+def test_check_success_high_enrichment_low_yield():
+    """High enrichment but yield below 5% returns False."""
+    acc = Account()
+    acc.records = [_make_record(1.0, 100.0), _make_record(20.0, 3.0)]
+    assert acc.check_success() is False
+
+
+def test_check_success_low_enrichment_high_yield():
+    """High yield but enrichment below 10-fold returns False."""
+    acc = Account()
+    acc.records = [_make_record(1.0, 100.0), _make_record(5.0, 90.0)]
+    assert acc.check_success() is False
+
+
+def test_check_success_only_initial_record():
+    """Only one record (initial step) is never a success."""
+    acc = Account()
+    acc.records = [_make_record(1.0, 100.0)]
+    assert acc.check_success() is False
+
+
+def test_check_success_no_records():
+    """Empty record list returns False without error."""
+    acc = Account()
+    assert acc.check_success() is False

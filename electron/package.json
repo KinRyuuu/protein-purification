@@ -2,6 +2,16 @@
   "name": "protein-purification",
   "version": "0.1.0",
   "description": "Educational protein purification simulation",
+  "author": {
+    "name": "KinRyuuu",
+    "email": "50115571+KinRyuuu@users.noreply.github.com",
+    "url": "https://github.com/KinRyuuu/protein-purification"
+  },
+  "homepage": "https://github.com/KinRyuuu/protein-purification",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KinRyuuu/protein-purification.git"
+  },
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -21,18 +31,27 @@
       {
         "from": "../dist/protein-purification-server",
         "to": "backend",
-        "filter": ["**/*"]
+        "filter": [
+          "**/*"
+        ]
       }
     ],
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "category": "Education"
     },
     "mac": {
-      "target": ["dmg"]
+      "target": [
+        "dmg"
+      ]
     },
     "win": {
-      "target": ["nsis"]
+      "target": [
+        "nsis"
+      ]
     }
   }
 }

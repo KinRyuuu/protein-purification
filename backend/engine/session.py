@@ -119,10 +119,11 @@ class PurificationSession:
         if self.hic_precipitation >= 0.001:
             state["hic_precipitation"] = self.hic_precipitation
 
-        failure = self.account.check_failure(self.proteins, self.enzyme_index) if (
-            self.phase == SessionPhase.FINISHED and self.enzyme_index >= 0
-        ) else None
-        if failure:
-            state["failure_message"] = failure
+        if self.phase == SessionPhase.FINISHED and self.enzyme_index >= 0:
+            failure = self.account.check_failure(self.proteins, self.enzyme_index)
+            if failure:
+                state["failure_message"] = failure
+            else:
+                state["success_message"] = "Purification complete!"
 
         return state

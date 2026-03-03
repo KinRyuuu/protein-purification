@@ -80,5 +80,7 @@ async def pool(
     failure = session.account.check_failure(session.proteins, session.enzyme_index)
     if failure:
         session.phase = SessionPhase.FINISHED
+    elif session.account.check_success():
+        session.phase = SessionPhase.FINISHED
 
     return session.to_state_dict()

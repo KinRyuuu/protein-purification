@@ -15,7 +15,6 @@ import {
   run2dPage,
   toggleStain,
   downloadSave,
-  deleteSession,
 } from "../api";
 import type { SessionState } from "../state";
 import { getState, updateState } from "../state";
@@ -354,7 +353,7 @@ export function updateToolbarState(state: SessionState): void {
   if (btnSave) btnSave.disabled = !isRunning;
 
   const btnRestart = buttons.get("btn-restart");
-  if (btnRestart) btnRestart.disabled = !isRunning;
+  if (btnRestart) btnRestart.disabled = !(isRunning || state.phase === "finished");
 }
 
 export { gelVisible };

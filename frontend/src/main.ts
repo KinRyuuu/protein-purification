@@ -15,7 +15,7 @@ import {
   handlePool,
   gelVisible,
 } from "./components/toolbar";
-import { showAlert } from "./components/dialog-base";
+
 
 function showView(id: string): void {
   document.getElementById(id)?.classList.remove("hidden");
@@ -62,16 +62,23 @@ function handleStateChange(state: SessionState): void {
       state.mixtureName,
       state.enzymeIndex,
     );
-
-    // Failure detection
-    if (state.failureMessage) {
-      showAlert("Oops!", state.failureMessage);
-    }
-
   } else {
     hideView("elution-view");
     hideView("gel-view");
     hideView("record-view");
+  }
+
+  // Status banner
+  const banner = document.getElementById("status-banner")!;
+  if (state.successMessage) {
+    banner.textContent = state.successMessage;
+    banner.className = "status-complete";
+  } else if (state.failureMessage) {
+    banner.textContent = state.failureMessage;
+    banner.className = "status-failed";
+  } else {
+    banner.textContent = "";
+    banner.className = "hidden";
   }
 }
 
@@ -87,8 +94,8 @@ async function main(): Promise<void> {
   onStateChange(handleStateChange);
 
   // Listen for restart requests from toolbar
-  document.addEventListener("pp-restart", (async (e: CustomEvent) => {
-    const { sessionId } = e.detail as { sessionId: string };
+  document.addEventListener("pp-restart", async (e: Event) => {
+    const { sessionId } = (e as CustomEvent).detail as { sessionId: string };
     try {
       if (sessionId) await deleteSession(sessionId);
     } catch { /* ignore */ }
@@ -96,9 +103,12 @@ async function main(): Promise<void> {
     hideView("elution-view");
     hideView("gel-view");
     hideView("record-view");
+    const banner = document.getElementById("status-banner")!;
+    banner.textContent = "";
+    banner.className = "hidden";
     showView("splash-view");
     renderSplash(document.getElementById("splash-view")!);
-  }) as EventListener);
+  });
 
   // Listen for pool requests from elution view drag-select
   document.addEventListener("pool-request", ((e: CustomEvent) => {
