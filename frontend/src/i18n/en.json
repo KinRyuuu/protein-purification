@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "Protein Purification",
+    "author": "Prof. Andrew Booth",
+    "newSession": "New Session",
+    "loadSaved": "Load Saved"
+  },
+  "separation": {
+    "ammoniumSulfate": "Ammonium Sulfate",
+    "heatTreatment": "Heat Treatment",
+    "gelFiltration": "Gel Filtration",
+    "ionExchange": "Ion Exchange",
+    "hic": "Hydrophobic Interaction",
+    "affinity": "Affinity Chromatography"
+  },
+  "fractions": {
+    "assay": "Assay",
+    "dilute": "Dilute",
+    "pool": "Pool"
+  },
+  "electrophoresis": {
+    "page1d": "1D PAGE",
+    "page2d": "2D PAGE",
+    "coomassie": "Coomassie",
+    "immunoblot": "Immunoblot",
+    "hideGel": "Hide Gel",
+    "abandonStep": "Abandon Step"
+  },
+  "record": {
+    "title": "Purification of protein {{enzyme}} from {{mixture}}",
+    "method": "Method",
+    "protein": "Protein (mg)",
+    "enzyme": "Enzyme (Units)",
+    "yield": "Yield (%)",
+    "enrichment": "Enrichment",
+    "cost": "Cost",
+    "initial": "Initial",
+    "empty": "Records of subsequent purification steps will be added here."
+  },
+  "elution": {
+    "fractionNumber": "Fraction number",
+    "absorbance": "Absorbance at 280 nm",
+    "enzymeActivity": "Enzyme activity (Units/fraction)",
+    "saltConcentration": "Salt concentration (molar)",
+    "ph": "pH"
+  },
+  "failure": {
+    "enzymeLost": "You have lost the enzyme!",
+    "tooManySteps": "Not finished in time",
+    "costTooHigh": "Cost is too high!"
+  }
+}

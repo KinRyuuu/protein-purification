@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "La Purification des Prot\u00e9ines",
+    "author": "Prof. Andrew Booth",
+    "newSession": "Nouvelle Session",
+    "loadSaved": "Charger Sauvegarde"
+  },
+  "separation": {
+    "ammoniumSulfate": "Sulfate d'ammonium",
+    "heatTreatment": "Traitement par la chaleur",
+    "gelFiltration": "Filtration sur gel",
+    "ionExchange": "\u00c9change d'ions",
+    "hic": "Interactions hydrophobes",
+    "affinity": "Chromatographie d'affinit\u00e9"
+  },
+  "fractions": {
+    "assay": "Dosage enzymatique",
+    "dilute": "Diluer",
+    "pool": "Combiner"
+  },
+  "electrophoresis": {
+    "page1d": "PAGE en une dimension",
+    "page2d": "PAGE en deux dimensions",
+    "coomassie": "Bleu de Coomassie",
+    "immunoblot": "Immunotransfert",
+    "hideGel": "Masquer gel",
+    "abandonStep": "Abandon \u00e9tape"
+  },
+  "record": {
+    "title": "Purification de la prot\u00e9ine {{enzyme}} de {{mixture}}",
+    "method": "M\u00e9thode",
+    "protein": "Prot\u00e9ine (mg)",
+    "enzyme": "Enzyme (Unit\u00e9s)",
+    "yield": "Rendement (%)",
+    "enrichment": "Purification",
+    "cost": "Co\u00fbt",
+    "initial": "Initial",
+    "empty": "Les r\u00e9sultats des \u00e9tapes de purification suivantes seront ajout\u00e9s ici."
+  },
+  "elution": {
+    "fractionNumber": "Fraction no.",
+    "absorbance": "Absorbance \u00e0 280 nm",
+    "enzymeActivity": "Activit\u00e9 de l'enzyme (Unit\u00e9s/fraction)",
+    "saltConcentration": "Concentration de sel (molaire)",
+    "ph": "pH"
+  },
+  "failure": {
+    "enzymeLost": "Vous avez perdu l'enzyme!",
+    "tooManySteps": "Non termin\u00e9 apr\u00e8s 10 \u00e9tapes...",
+    "costTooHigh": "Le co\u00fbt est trop haut!"
+  }
+}

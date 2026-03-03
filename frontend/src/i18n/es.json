@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "Purificaci\u00f3n de Prote\u00ednas",
+    "author": "Prof. Andrew Booth",
+    "newSession": "Nueva Sesi\u00f3n",
+    "loadSaved": "Cargar Guardado"
+  },
+  "separation": {
+    "ammoniumSulfate": "Sulfato de Amonio",
+    "heatTreatment": "Tratamiento con Calor",
+    "gelFiltration": "Filtraci\u00f3n por Gel",
+    "ionExchange": "Intercambio I\u00f3nico",
+    "hic": "Interacci\u00f3n Hidrof\u00f3bica",
+    "affinity": "Cromatograf\u00eda de Afinidad"
+  },
+  "fractions": {
+    "assay": "Ensayar",
+    "dilute": "Diluir",
+    "pool": "Combinar"
+  },
+  "electrophoresis": {
+    "page1d": "PAGE en una dimensi\u00f3n",
+    "page2d": "PAGE en dos dimensiones",
+    "coomassie": "Azul de Coomassie",
+    "immunoblot": "Western Blot",
+    "hideGel": "Ocultar gel",
+    "abandonStep": "Abandonar etapa"
+  },
+  "record": {
+    "title": "Purificaci\u00f3n de prote\u00edna {{enzyme}} de {{mixture}}",
+    "method": "M\u00e9todo",
+    "protein": "Prote\u00edna (mg)",
+    "enzyme": "Enzima (Unidades)",
+    "yield": "Rendimiento (%)",
+    "enrichment": "Purificaci\u00f3n",
+    "cost": "Costo",
+    "initial": "Inicial",
+    "empty": "Los registros de las etapas de purificaci\u00f3n posteriores se agregar\u00e1n aqu\u00ed."
+  },
+  "elution": {
+    "fractionNumber": "Fracci\u00f3n no.",
+    "absorbance": "Absorbancia a 280 nm",
+    "enzymeActivity": "Actividad de la enzima (Unidades/fracci\u00f3n)",
+    "saltConcentration": "Concentraci\u00f3n de sal (molar)",
+    "ph": "pH"
+  },
+  "failure": {
+    "enzymeLost": "\u00a1Usted ha perdido la enzima!",
+    "tooManySteps": "No terminado luego de 10 etapas...",
+    "costTooHigh": "\u00a1El costo es muy alto!"
+  }
+}

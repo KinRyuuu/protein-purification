@@ -1,0 +1,92 @@
+{
+  "format_version": 1,
+  "proteins": [
+    {
+      "residues": {
+        "asp": 28,
+        "glu": 32,
+        "his": 36,
+        "lys": 44,
+        "arg": 12,
+        "tyr": 12,
+        "cys_sh": 4
+      },
+      "his_tag": false,
+      "molecular_weight": 40000.0,
+      "subunits": [
+        {
+          "count": 1,
+          "molecular_weight": 40000.0
+        }
+      ],
+      "original_amount": 10.0,
+      "amount": 10.0,
+      "stability": {
+        "max_temp": 40.0,
+        "ph_min": 2.5,
+        "ph_max": 11.5
+      },
+      "hydrophobicity": 155.0,
+      "original_activity": 2,
+      "activity": 2
+    },
+    {
+      "residues": {
+        "asp": 28,
+        "glu": 32,
+        "his": 32,
+        "lys": 44,
+        "arg": 12,
+        "tyr": 0,
+        "cys_sh": 0
+      },
+      "his_tag": false,
+      "molecular_weight": 20000.0,
+      "subunits": [
+        {
+          "count": 1,
+          "molecular_weight": 20000.0
+        }
+      ],
+      "original_amount": 10.0,
+      "amount": 10.0,
+      "stability": {
+        "max_temp": 40.0,
+        "ph_min": 2.5,
+        "ph_max": 11.5
+      },
+      "hydrophobicity": 155.0,
+      "original_activity": 2,
+      "activity": 2
+    },
+    {
+      "residues": {
+        "asp": 28,
+        "glu": 32,
+        "his": 36,
+        "lys": 20,
+        "arg": 12,
+        "tyr": 12,
+        "cys_sh": 4
+      },
+      "his_tag": false,
+      "molecular_weight": 20000.0,
+      "subunits": [
+        {
+          "count": 1,
+          "molecular_weight": 20000.0
+        }
+      ],
+      "original_amount": 10.0,
+      "amount": 10.0,
+      "stability": {
+        "max_temp": 40.0,
+        "ph_min": 2.5,
+        "ph_max": 11.5
+      },
+      "hydrophobicity": 155.0,
+      "original_activity": 2,
+      "activity": 2
+    }
+  ]
+}

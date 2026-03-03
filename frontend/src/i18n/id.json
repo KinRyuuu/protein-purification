@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "Pemurnian Protein",
+    "author": "Prof. Andrew Booth",
+    "newSession": "Sesi Baru",
+    "loadSaved": "Muat Tersimpan"
+  },
+  "separation": {
+    "ammoniumSulfate": "Fraksinasi Amonium Sulfat",
+    "heatTreatment": "Denaturasi Panas",
+    "gelFiltration": "Kromatografi Filtrasi Gel",
+    "ionExchange": "Kromatografi Penukar Ion",
+    "hic": "Kromatografi Interaksi Hidrofobik",
+    "affinity": "Kromatografi Afinitas"
+  },
+  "fractions": {
+    "assay": "Uji aktivitas enzim",
+    "dilute": "Encerkan",
+    "pool": "Gabungkan"
+  },
+  "electrophoresis": {
+    "page1d": "PAGE 1-dimensi",
+    "page2d": "PAGE 2-dimensi",
+    "coomassie": "Coomassie Blue",
+    "immunoblot": "Imunoblot",
+    "hideGel": "Sembunyikan gel",
+    "abandonStep": "Buang langkah ini"
+  },
+  "record": {
+    "title": "Pemurnian protein {{enzyme}} dari {{mixture}}",
+    "method": "Metode",
+    "protein": "Protein (mg)",
+    "enzyme": "Enzim (Unit)",
+    "yield": "Hasil (%)",
+    "enrichment": "Pemurnian",
+    "cost": "Biaya",
+    "initial": "Awal",
+    "empty": "Catatan langkah pemurnian selanjutnya akan ditambahkan di sini."
+  },
+  "elution": {
+    "fractionNumber": "Fraksi nomor",
+    "absorbance": "Absorpsi pada panjang gelombang 280 nm",
+    "enzymeActivity": "Aktivitas Enzim (Unit/fraksi)",
+    "saltConcentration": "Konsentrasi garam (molar)",
+    "ph": "pH"
+  },
+  "failure": {
+    "enzymeLost": "Anda kehilangan enzimnya!",
+    "tooManySteps": "Masih belum selesai setelah 10 tahap...",
+    "costTooHigh": "Biayanya terlalu mahal!"
+  }
+}
